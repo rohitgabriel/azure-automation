@@ -35,10 +35,10 @@ pipeline {
         stage("terraform plan") {
             steps {
                 sh '''
-                ARM_CLIENT_ID="${AZURE_CRED_USR}"
-                ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
-                ARM_TENANT_ID="${AZURE_ID_USR}"
-                 ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
+                export TF_VAR_ARM_CLIENT_ID="${AZURE_CRED_USR}"
+                export TF_VAR_ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
+                export TF_VAR_ARM_TENANT_ID="${AZURE_ID_USR}"
+                export TF_VAR_ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
                 /usr/local/bin/terraform plan -out=tfplan -input=false
                 '''
             }
