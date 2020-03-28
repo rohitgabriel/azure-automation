@@ -3,7 +3,7 @@ output "vmss_public_ip" {
 }
 
 output "vmssvm_public_ip" {
-    value = azurerm_public_ip.vmssvm.fqdn
+    value = azurerm_public_ip.vmssvm.vmssvm_public_ip
 }
 
 

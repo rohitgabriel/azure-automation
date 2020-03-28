@@ -1,4 +1,4 @@
-resource "azurerm_linux_virtual_machine" "myterraformvm" {
+resource "azurerm_linux_virtual_machine" "vmssvm" {
     name                  = "weatherappvm"
     location              = var.location
     resource_group_name   = azurerm_resource_group.vmss.name

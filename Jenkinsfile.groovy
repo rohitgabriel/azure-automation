@@ -24,41 +24,35 @@ pipeline {
         //         '''
         //     }
         // }
-        // stage("terraform init") {
-        //     steps {
-        //         sh """
-        //         /usr/local/bin/terraform init -input=false
-        //         """
-        //     }
-        // }
-        // stage("terraform plan") {
-        //     steps {
-        //         sh '''
-        //         export TF_VAR_AWS_ACCESS_KEY_ID="${AWS_CRED_USR}"
-        //         export TF_VAR_AWS_SECRET_ACCESS_KEY="${AWS_CRED_PSW}"
-        //         export TF_VAR_AWS_DEFAULT_REGION="ap-southeast-2"
-        //         /usr/local/bin/terraform plan -out=tfplan -input=false
-        //         '''
-        //     }
-        // }
-        // stage("Approval required") {
-        //     input {
-        //     message "Apply or Abort?"
-        //     }
-        //     steps {
-        //         echo 'Terraform state is maintained at app.terraform.io, org: int, workspace: demo'
-        //     }
-        // }
-        // stage("terraform apply") {
-        //     steps {
-        //         sh '''
-        //         export TF_VAR_AWS_ACCESS_KEY_ID="${AWS_CRED_USR}"
-        //         export TF_VAR_AWS_SECRET_ACCESS_KEY="${AWS_CRED_PSW}"
-        //         export TF_VAR_AWS_DEFAULT_REGION="ap-southeast-2"
-        //         /usr/local/bin/terraform apply -input=false tfplan
-        //         '''
-        //     }
-        // }
+        stage("terraform init") {
+            steps {
+                sh """
+                /usr/local/bin/terraform init -input=false
+                """
+            }
+        }
+        stage("terraform plan") {
+            steps {
+                sh '''
+                /usr/local/bin/terraform plan -out=tfplan -input=false
+                '''
+            }
+        }
+        stage("Approval required") {
+            input {
+            message "Apply or Abort?"
+            }
+            steps {
+                echo 'Terraform state is maintained at app.terraform.io, org: int, workspace: azure-automation'
+            }
+        }
+        stage("terraform apply") {
+            steps {
+                sh '''
+                /usr/local/bin/terraform apply -input=false tfplan
+                '''
+            }
+        }
         // stage("Refresh Instance in ASG") {
         //     steps {
         //         withAWS(credentials: 'TerraformAWSCreds', region: 'ap-southeast-2') {
@@ -66,12 +60,12 @@ pipeline {
         //       }
         //     }
         // }
-        // stage("clean up") {
-        //     steps {
-        //         sh '''
-        //         rm ./tfplan
-        //         '''
-        //     }
-        // }
+        stage("clean up") {
+            steps {
+                sh '''
+                rm ./tfplan
+                '''
+            }
+        }
     }
 }
