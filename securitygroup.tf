@@ -35,7 +35,7 @@ resource "azurerm_public_ip" "vmssvm" {
     name                         = "vmss-vm-ip"
     location                     = var.location
     resource_group_name          = azurerm_resource_group.vmss.name
-    allocation_method            = "Dynamic"
+    allocation_method            = "Static"
 
     tags = {
       environment = "demo",
