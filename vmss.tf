@@ -76,12 +76,13 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
       primary   = true
       subnet_id = azurerm_subnet.vmss.id
     }
-    public_ip_address {
+    
+  }
+  public_ip_address {
       name                                 = "PublicIPConfiguration"
       idle_timeout                         = "30"
       domain_name_label                    = azurerm_resource_group.vmss.name
     }
-  }
 }
 
 resource "azurerm_virtual_machine_scale_set" "vmss" {
