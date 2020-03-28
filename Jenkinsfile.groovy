@@ -70,7 +70,7 @@ pipeline {
                 sh '''
 
                 export TF_VAR_sshkey="${AZUREPUB_PSW}"
-                /usr/local/bin/terraform apply -input=false tfplan -var 'ARM_SUBSCRIPTION_ID="${ARM_SUBSCRIPTION_ID}"' -var 'ARM_CLIENT_ID="${ARM_CLIENT_ID}"' -var 'ARM_CLIENT_SECRET="${ARM_CLIENT_SECRET}"' -var 'ARM_TENANT_ID="${ARM_TENANT_ID}"'
+                /usr/local/bin/terraform apply -input=false -var 'ARM_SUBSCRIPTION_ID="${ARM_SUBSCRIPTION_ID}"' -var 'ARM_CLIENT_ID="${ARM_CLIENT_ID}"' -var 'ARM_CLIENT_SECRET="${ARM_CLIENT_SECRET}"' -var 'ARM_TENANT_ID="${ARM_TENANT_ID}"' tfplan
                 '''
                 }
             }
