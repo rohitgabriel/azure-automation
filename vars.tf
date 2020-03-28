@@ -24,3 +24,7 @@ variable "admin_password" {
     default = "ubuntu"
 }
 
+variable "ssh-source-address" {
+  type    = string
+  default = "*"
+}
