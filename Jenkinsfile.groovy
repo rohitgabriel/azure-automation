@@ -40,10 +40,10 @@ pipeline {
         stage("terraform plan") {
             steps {
                 withCredentials([azureServicePrincipal(credentialsId: 'AZURE_ACCOUNT_CREDS',
-                                    TF_VAR_ARM_SUBSCRIPTION_ID: 'SUBS_ID',
-                                    TF_VAR_ARM_CLIENT_ID: 'CLIENT_ID',
-                                    TF_VAR_ARM_CLIENT_SECRET: 'CLIENT_SECRET',
-                                    TF_VAR_ARM_TENANT_ID: 'TENANT_ID')]) {
+                                    ARM_SUBSCRIPTION_ID: 'SUBS_ID',
+                                    ARM_CLIENT_ID: 'CLIENT_ID',
+                                    ARM_CLIENT_SECRET: 'CLIENT_SECRET',
+                                    ARM_TENANT_ID: 'TENANT_ID')]) {
                 sh '''
 
                 export TF_VAR_sshkey="${AZUREPUB_PSW}"
