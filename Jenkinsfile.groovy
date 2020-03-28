@@ -19,17 +19,14 @@ pipeline {
         //         url: 'https://github.com/rohitgabriel/azure-automation.git'
         //     }
         // }
-        // stage("Packer build") {
-        //     steps {
-        //         sh '''
-        //         ./build-image-with-packer.sh
-        //         '''
-        //     }
-        // }
-                        // export TF_VAR_ARM_CLIENT_ID="${AZURE_CRED_USR}"
-                // export TF_VAR_ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
-                // export TF_VAR_ARM_TENANT_ID="${AZURE_ID_USR}"
-                // export TF_VAR_ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
+        stage("Packer build") {
+            steps {
+                sh '''
+                ./build-image-with-packer.sh
+                '''
+            }
+        }
+
         stage("terraform init") {
             steps {
                 sh """
@@ -75,7 +72,7 @@ pipeline {
                 }
             }
         }
-      //-var 'ARM_SUBSCRIPTION_ID="${ARM_SUBSCRIPTION_ID}"' -var 'ARM_CLIENT_ID="${ARM_CLIENT_ID}"' -var 'ARM_CLIENT_SECRET="${ARM_CLIENT_SECRET}"' -var 'ARM_TENANT_ID="${ARM_TENANT_ID}"'
+      
         // stage("Refresh Instance in ASG") {
         //     steps {
         //         withAWS(credentials: 'TerraformAWSCreds', region: 'ap-southeast-2') {
