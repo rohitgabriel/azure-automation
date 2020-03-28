@@ -1,6 +1,6 @@
 variable "location" {
   type    = string
-  default = "auseast"
+  default = "australiaeast"
 }
 
 variable ARM_SUBSCRIPTION_ID {}
