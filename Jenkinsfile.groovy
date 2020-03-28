@@ -7,7 +7,11 @@ pipeline {
         client_secret="${AZURE_CRED_PSW}"
         tenant_id="${AZURE_ID_USR}"
         subscription_id="${AZURE_ID_PSW}"
-        location="Australia East"
+        location="australiaeast"
+        ARM_CLIENT_ID="${AZURE_CRED_USR}"
+        ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
+        ARM_TENANT_ID="${AZURE_ID_USR}"
+        ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
     }
     stages {
         // stage('Checkout repo') {
