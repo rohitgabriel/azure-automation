@@ -3,6 +3,7 @@ pipeline {
     environment {
         AZURE_CRED=credentials('AZURE_CRED')
         AZURE_ID=credentials('AZURE_ID')
+        AZUREPUB=credentials('AZUREPUB')
         client_id="${AZURE_CRED_USR}"
         client_secret="${AZURE_CRED_PSW}"
         tenant_id="${AZURE_ID_USR}"
@@ -39,6 +40,7 @@ pipeline {
                 export TF_VAR_ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
                 export TF_VAR_ARM_TENANT_ID="${AZURE_ID_USR}"
                 export TF_VAR_ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
+                export TF_VAR_sshkey="${AZUREPUB_PSW}"
                 /usr/local/bin/terraform plan -out=tfplan -input=false
                 '''
             }
