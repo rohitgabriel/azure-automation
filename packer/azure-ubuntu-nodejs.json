@@ -1,0 +1,39 @@
+{
+  "builders": [{
+    "type": "azure-arm",
+
+    
+
+    "managed_image_resource_group_name": "rg-auseast-1",
+    "managed_image_name": "packer-ubuntu18-weatherapp_{{timestamp}}",
+
+    "os_type": "Linux",
+    "image_publisher": "Canonical",
+    "image_offer": "UbuntuServer",
+    "image_sku": "16.04-LTS",
+
+    "azure_tags": {
+        "team": "presales",
+        "product": "weather",
+        "function": "api",
+        "costcenter": "007"
+    },
+
+    "location": "Australia East",
+    "vm_size": "Standard_D1_v2"
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [  "shell/install_software.sh"   ],
+      "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",
+      "pause_before": "10s"
+    },
+    {
+      "type": "ansible",
+      "ansible_env_vars": [ "ANSIBLE_NOCOLOR=True","become_user=root","become=true" ],
+      "playbook_file": "ansible/weatherapp-playbook.yml",
+      "user": "ubuntu"
+    }
+  ]
+}
