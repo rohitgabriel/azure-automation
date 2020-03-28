@@ -11,7 +11,7 @@ variable sshkey {}
 
 variable "resource_group_name" {
   description = "Resources craeted by terraform"
-  default     = "terraformResourceGroup"
+  default     = "terraform-resource-group"
 }
 
 variable "application_port" {
