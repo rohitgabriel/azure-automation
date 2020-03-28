@@ -35,13 +35,13 @@ pipeline {
         }
         stage("terraform plan") {
             steps {
-                withCredentials([azureServicePrincipal(credentialsId: 'credentials_id',
+                withCredentials([azureServicePrincipal(credentialsId: 'AZURE_ACCOUNT_CREDS',
                                     subscriptionIdVariable: 'SUBS_ID',
                                     clientIdVariable: 'CLIENT_ID',
                                     clientSecretVariable: 'CLIENT_SECRET',
                                     tenantIdVariable: 'TENANT_ID')]) {
-    sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
-}
+                sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
+                }
                 // sh '''
                 // export TF_VAR_ARM_CLIENT_ID="${AZURE_CRED_USR}"
                 // export TF_VAR_ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
