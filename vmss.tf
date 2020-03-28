@@ -46,7 +46,44 @@ data "azurerm_resource_group" "image" {
   name = "rg-auseast-1"
 }
 
+resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
+  name                = "vmss-linux"
+  resource_group_name = azurerm_resource_group.vmss.name
+  location            = var.location
+  sku                 = "Standard_DS1_v2"
+  instances           = 1
+  admin_username      = "ubuntu"
 
+  admin_ssh_key {
+    username   = "ubuntu"
+    public_key = var.sshkey
+  }
+
+  source_image_reference {
+    id=data.azurerm_image.image.id
+  }
+
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+  }
+
+  network_interface {
+    name    = "vmsslinuxprofile"
+    primary = true
+
+    ip_configuration {
+      name      = "vmsslinuxipconfiguration"
+      primary   = true
+      subnet_id = azurerm_subnet.vmss.id
+    }
+    public_ip_address_configuration {
+      name                                 = "PublicIPConfiguration"
+      idle_timeout                         = "30"
+      domain_name_label                    = azurerm_resource_group.vmss.name
+    }
+  }
+}
 
 resource "azurerm_virtual_machine_scale_set" "vmss" {
   name                = "vmscaleset"
@@ -105,11 +142,11 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
     }
   }
 
-  public_ip_address_configuration {
-        name                                 = "PublicIPConfiguration"
-        idle_timeout                         = "30"
-        domain_name_label                    = azurerm_resource_group.vmss.name
-    }
+#   public_ip_address_configuration {
+#         name                                 = "PublicIPConfiguration"
+#         idle_timeout                         = "30"
+#         domain_name_label                    = azurerm_resource_group.vmss.name
+#     }
   
   tags = {
     environment = "demo"
