@@ -10,13 +10,13 @@ pipeline {
         location="Australia East"
     }
     stages {
-        stage('Checkout repo') {
-            steps {
-                git branch: 'master',
-                credentialsId: 'mygitcredid',
-                url: 'https://github.com/rohitgabriel/azure-automation.git'
-            }
-        }
+        // stage('Checkout repo') {
+        //     steps {
+        //         git branch: 'master',
+        //         credentialsId: 'mygitcredid',
+        //         url: 'https://github.com/rohitgabriel/azure-automation.git'
+        //     }
+        // }
         // stage("Packer build") {
         //     steps {
         //         sh '''
