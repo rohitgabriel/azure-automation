@@ -1,8 +1,18 @@
 {
+  "variables": {
+    "client_id": "{{env `client_id`}} ",
+    "client_secret": "{{env `client_secret`}}",
+    "tenant_id": "{{env `tenant_id`}}",
+    "subscription_id": "{{env `subscription_id`}}"
+  },
+
   "builders": [{
     "type": "azure-arm",
 
-    
+    "client_id": "{{user `client_id`}}",
+    "client_secret": "{{user `client_secret`}}",
+    "tenant_id": "{{user `tenant_id`}}",
+    "subscription_id": "{{user `subscription_id`}}",
 
     "managed_image_resource_group_name": "rg-auseast-1",
     "managed_image_name": "packer-ubuntu18-weatherapp_{{timestamp}}",
