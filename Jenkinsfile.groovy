@@ -2,13 +2,13 @@ pipeline {
     agent any
     environment {
         AZURE_CRED=credentials('AZURE_CRED')
-        // AZURE_ID=credentials('AZURE_ID')
+        AZURE_ID=credentials('AZURE_ID')
         AZUREPUB=credentials('AZUREPUB')
-        // client_id="${AZURE_CRED_USR}"
-        // client_secret="${AZURE_CRED_PSW}"
-        // tenant_id="${AZURE_ID_USR}"
-        // subscription_id="${AZURE_ID_PSW}"
-        // location="australiaeast"
+        client_id="${AZURE_CRED_USR}"
+        client_secret="${AZURE_CRED_PSW}"
+        tenant_id="${AZURE_ID_USR}"
+        subscription_id="${AZURE_ID_PSW}"
+        location="australiaeast"
         
     }
     stages {
