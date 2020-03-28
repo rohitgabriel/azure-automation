@@ -40,16 +40,14 @@ pipeline {
                                     clientIdVariable: 'CLIENT_ID',
                                     clientSecretVariable: 'CLIENT_SECRET',
                                     tenantIdVariable: 'TENANT_ID')]) {
-                sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
-                }
-                // sh '''
-                // export TF_VAR_ARM_CLIENT_ID="${AZURE_CRED_USR}"
-                // export TF_VAR_ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
-                // export TF_VAR_ARM_TENANT_ID="${AZURE_ID_USR}"
-                // export TF_VAR_ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
-                // export TF_VAR_sshkey="${AZUREPUB_PSW}"
-                // /usr/local/bin/terraform plan -out=tfplan -input=false
-                // '''
+                sh '''
+                export TF_VAR_ARM_CLIENT_ID="${AZURE_CRED_USR}"
+                export TF_VAR_ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
+                export TF_VAR_ARM_TENANT_ID="${AZURE_ID_USR}"
+                export TF_VAR_ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
+                export TF_VAR_sshkey="${AZUREPUB_PSW}"
+                /usr/local/bin/terraform plan -out=tfplan -input=false
+                '''
             }
         }
         stage("Approval required") {
