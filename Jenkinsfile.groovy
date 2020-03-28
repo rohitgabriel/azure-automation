@@ -10,20 +10,20 @@ pipeline {
         location="Australia East"
     }
     stages {
-        // stage('Checkout repo') {
-        //     steps {
-        //         git branch: 'master',
-        //         credentialsId: 'mygitcredid',
-        //         url: 'https://github.com/rohitgabriel/aws-azure.git'
-        //     }
-        // }
-        stage("Packer build") {
+        stage('Checkout repo') {
             steps {
-                sh '''
-                ./build-image-with-packer.sh
-                '''
+                git branch: 'master',
+                credentialsId: 'mygitcredid',
+                url: 'https://github.com/rohitgabriel/azure-automation.git'
             }
         }
+        // stage("Packer build") {
+        //     steps {
+        //         sh '''
+        //         ./build-image-with-packer.sh
+        //         '''
+        //     }
+        // }
         // stage("terraform init") {
         //     steps {
         //         sh """
