@@ -103,13 +103,13 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
       load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.bpepool.id]
       primary = true
     }
+  }
 
-    public_ip_address_configuration {
+  public_ip_address_configuration {
         name                                 = "PublicIPConfiguration"
         idle_timeout                         = "30"
         domain_name_label                    = azurerm_resource_group.vmss.name
     }
-  }
   
   tags = {
     environment = "demo"
