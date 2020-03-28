@@ -59,9 +59,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
     public_key = var.sshkey
   }
 
-  source_image_id {
-    id=data.azurerm_image.image.id
-  }
+  source_image_id=data.azurerm_image.image.id
+  
 
   os_disk {
     storage_account_type = "Standard_LRS"
@@ -77,11 +76,11 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
       primary   = true
       subnet_id = azurerm_subnet.vmss.id
     }
-    # public_ip_address_configuration {
-    #   name                                 = "PublicIPConfiguration"
-    #   idle_timeout                         = "30"
-    #   domain_name_label                    = azurerm_resource_group.vmss.name
-    # }
+    public_ip_address {
+      name                                 = "PublicIPConfiguration"
+      idle_timeout                         = "30"
+      domain_name_label                    = azurerm_resource_group.vmss.name
+    }
   }
 }
 
