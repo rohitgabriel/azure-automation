@@ -4,8 +4,8 @@ resource "azurerm_virtual_network" "vmss" {
   location            = var.location
   resource_group_name = azurerm_resource_group.vmss.name
 
-  tags {
-    environment = "demo"
+  tags = {
+    environment = "demo",
     costcenter = "007"
   }
 }
@@ -24,8 +24,8 @@ resource "azurerm_public_ip" "vmss" {
   allocation_method            = "static"
   domain_name_label            = azurerm_resource_group.vmss.name
 
-  tags {
-    environment = "demo"
+  tags = {
+    environment = "demo",
     costcenter = "007"
   }
 }

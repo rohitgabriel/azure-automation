@@ -8,7 +8,7 @@ resource "azurerm_lb" "vmss" {
     public_ip_address_id = azurerm_public_ip.vmss.id
   }
 
-  tags {
+  tags = {
     environment = "demo"
     costcenter = "007"
     team = "presales"
@@ -105,7 +105,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
     }
   }
   
-  tags {
+  tags = {
     environment = "demo"
     costcenter = "007"
     team = "presales"
