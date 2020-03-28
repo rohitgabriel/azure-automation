@@ -26,6 +26,10 @@ pipeline {
         //         '''
         //     }
         // }
+                        // export TF_VAR_ARM_CLIENT_ID="${AZURE_CRED_USR}"
+                // export TF_VAR_ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
+                // export TF_VAR_ARM_TENANT_ID="${AZURE_ID_USR}"
+                // export TF_VAR_ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
         stage("terraform init") {
             steps {
                 sh """
@@ -36,15 +40,12 @@ pipeline {
         stage("terraform plan") {
             steps {
                 withCredentials([azureServicePrincipal(credentialsId: 'AZURE_ACCOUNT_CREDS',
-                                    subscriptionIdVariable: 'SUBS_ID',
-                                    clientIdVariable: 'CLIENT_ID',
-                                    clientSecretVariable: 'CLIENT_SECRET',
-                                    tenantIdVariable: 'TENANT_ID')]) {
+                                    TF_VAR_ARM_SUBSCRIPTION_ID: 'SUBS_ID',
+                                    TF_VAR_ARM_CLIENT_ID: 'CLIENT_ID',
+                                    TF_VAR_ARM_CLIENT_SECRET: 'CLIENT_SECRET',
+                                    TF_VAR_ARM_TENANT_ID: 'TENANT_ID')]) {
                 sh '''
-                export TF_VAR_ARM_CLIENT_ID="${AZURE_CRED_USR}"
-                export TF_VAR_ARM_CLIENT_SECRET="${AZURE_CRED_PSW}"
-                export TF_VAR_ARM_TENANT_ID="${AZURE_ID_USR}"
-                export TF_VAR_ARM_SUBSCRIPTION_ID="${AZURE_ID_PSW}"
+
                 export TF_VAR_sshkey="${AZUREPUB_PSW}"
                 /usr/local/bin/terraform plan -out=tfplan -input=false
                 '''
