@@ -59,7 +59,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
     public_key = var.sshkey
   }
 
-  source_image_reference {
+  source_image_id {
     id=data.azurerm_image.image.id
   }
 
@@ -77,11 +77,11 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
       primary   = true
       subnet_id = azurerm_subnet.vmss.id
     }
-    public_ip_address_configuration {
-      name                                 = "PublicIPConfiguration"
-      idle_timeout                         = "30"
-      domain_name_label                    = azurerm_resource_group.vmss.name
-    }
+    # public_ip_address_configuration {
+    #   name                                 = "PublicIPConfiguration"
+    #   idle_timeout                         = "30"
+    #   domain_name_label                    = azurerm_resource_group.vmss.name
+    # }
   }
 }
 
