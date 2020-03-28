@@ -48,6 +48,7 @@ pipeline {
                 export TF_VAR_sshkey="${AZUREPUB_PSW}"
                 /usr/local/bin/terraform plan -out=tfplan -input=false
                 '''
+                }
             }
         }
         stage("Approval required") {
