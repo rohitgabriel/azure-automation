@@ -47,7 +47,7 @@ pipeline {
                 sh '''
 
                 export TF_VAR_sshkey="${AZUREPUB_PSW}"
-                /usr/local/bin/terraform plan -out=tfplan -input=false
+                /usr/local/bin/terraform plan -out=tfplan -input=false -var ARM_SUBSCRIPTION_ID="${ARM_SUBSCRIPTION_ID}" -var ARM_CLIENT_ID="${ARM_CLIENT_ID}" -var 
                 '''
                 }
             }
